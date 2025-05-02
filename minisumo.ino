@@ -55,7 +55,6 @@ void loop() {
     Serial.println("Enemy behind - moving forward-right");
     moveForwardRight();
   } else {
-    // Find closest enemy direction
     unsigned int minDist = MAX_DISTANCE;
     byte direction = 0; // 1=front, 2=left, 3=right
     
