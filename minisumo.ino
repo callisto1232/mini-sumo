@@ -15,8 +15,8 @@
 #define B1B 3
 #define ENA A2 //to control speed
 #define ENB A3 // so
-int speedA  = 255 // 0-255, 255 max
-int speedB = 255
+int speedA  = 255; // 0-255, 255 max
+int speedB = 255;
 const int inf_thresold = 700; // example While: 400, Black: 900, good thresold: 650
 string enemyPosition;
 sensors = [0, 0, 0, 0, 0]  // inf back, inf front, sonar left, sonar front, sonar right
