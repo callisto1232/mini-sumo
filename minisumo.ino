@@ -13,11 +13,15 @@
 #define A1B 5
 #define B1A 2
 #define B1B 3
+#define ENA A2 //to control speed
+#define ENA A3 // so
 int speedA  = 255 // 0-255, 255 max
 int speedB = 255
 const int inf_thresold = 700; // example While: 400, Black: 900, good thresold: 650
 string enemyPosition;
 sensors = [0, 0, 0, 0, 0]  // inf back, inf front, sonar left, sonar front, sonar right
+unsigned long previousMillis = 0;
+const long interval = 50; // 50 ms between sensor readings
 
 NewPing sonar1(TRIG_PIN_1, ECHO_PIN_1, MAX_DISTANCE);
 NewPing sonar2(TRIG_PIN_2, ECHO_PIN_2, MAX_DISTANCE);
@@ -29,6 +33,8 @@ void setup(){
   Serial.begin(9600);
   pinMode(INF_FRONT, INPUT);
   pinMode(INF_BACK, INPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
   pinMode(A1A, OUTPUT);
   pinMode(A1B, OUTPUT);
   pinMode(B1A, OUTPUT);
