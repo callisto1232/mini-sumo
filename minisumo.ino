@@ -14,7 +14,7 @@
 #define B1A 2
 #define B1B 3
 #define ENA A2 //to control speed
-#define ENA A3 // so
+#define ENB A3 // so
 int speedA  = 255 // 0-255, 255 max
 int speedB = 255
 const int inf_thresold = 700; // example While: 400, Black: 900, good thresold: 650
