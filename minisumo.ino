@@ -17,7 +17,7 @@ int speedA  = 255 // 0-255, 255 max
 int speedB = 255
 const int inf_thresold = 700; // example While: 400, Black: 900, good thresold: 650
 string enemyPosition;
-sensors = [0, 0, 0, 0, 0]  # inf back, inf front, sonar left, sonar front, sonar right
+sensors = [0, 0, 0, 0, 0]  // inf back, inf front, sonar left, sonar front, sonar right
 
 NewPing sonar1(TRIG_PIN_1, ECHO_PIN_1, MAX_DISTANCE);
 NewPing sonar2(TRIG_PIN_2, ECHO_PIN_2, MAX_DISTANCE);
@@ -43,18 +43,19 @@ void loop() {
     moveForwardLeft();
   } else if enemyPosition == "front" {
     moveForward();
+    // we need to use delay here but we won't. last comment 
   } else if enemyPosition == "right_front" {
     moveForwardRight();
   } else if enemyPosition == "right" {
     turnRight();
   } else if enemyPosition == "none" {
+    //check again then turn around (left)
     turnLeft();
   }
   
 }
 
 void moveForward() {
-  
   analogWrite(A1A, 0);
   analogWrite(A1B, speedA);
   analogWrite(B1A, 0);
@@ -139,3 +140,25 @@ void enemyPosition(){
 }
 // add if else to control at the beginning of the loop function to check if infrared sensors are white not to go out of the dohyo
 // qwertyuiop
+// we don't actually need to check infrared ones when distance is detected, unless the enemy escapes and we go out of the dohyo
+// in moving functions, if we just move the robot a little bit then check for the infrared again, we may reduce the possibility to exit the dohyo
+// we can collect the data to an array then check the average as in the github mini sumo repo by ethanphunter
+
+/*
+else if (lineR == LOW && lineL == HIGH) { // Right line sensor hits the white line and triggers low
+  motors(-100, -100);           // Back up
+  delay(200);                  // Only back up for .2 seconds
+  end_time = millis() + 400;   // Find the time 400 miliseconds into the future
+  while(millis() < end_time) { // Spin away from edge untill the time limit is hit
+    motors(-100, 100);
+    sensors();
+    if(midL > threshold || midR > threshold || prox == LOW){  // If you see a target, break loop
+      break;
+    }
+    digitalWrite(LED1_pin, LOW);
+    digitalWrite(LED2_pin, LOW);
+  }
+}
+
+it is using time to check when to move, where to move rather than delay, this way you can both check and move at the same time
+*/
